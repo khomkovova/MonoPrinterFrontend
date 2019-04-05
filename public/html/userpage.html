@@ -1,140 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/libs/semantic/semantic.css">
-    <script src="/libs/semantic/semantic.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="/libs/semantic/semantic.css">
+    <script src="/libs/semantic/semantic.js"></script> -->
+    <!-- MDB -->
+
     <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
     <!-- Font Awesome -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"
+        integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
 
     <!-- Tempus Dominus Bootstrap 4 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+        integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+        integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <div class="input-group-text">
-                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </div>
-
-            </div>
-            <div class="field">
-                <div class="input-group date">
-                    <input type="text" id="_attachmentName" class="form-control datetimepicker-input">
-                    <div class="input-group-append">
-                    <label for="attachmentName" class="input-group-text">
-                        <i class="fa fa-paperclip fa-1.2x" aria-hidden="true" ></i>
-                        <input type="file" id="attachmentName" name="attachmentName" style="display: none">
-                    </label>
-                    </div>
-                </div>
-            </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-    </div>
+    </nav>
+
+    <div class="container " id="container-send-file">
+        <div class="row">
+            <div class="col-sm-6">
+                <br>
+                <div class="card">
+                    <h3 class="display-6  card-header info-color text-center py-4">Add new file for printing</h3>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input"
+                                    data-target="#datetimepicker1" />
+                                <div class="input-group-append" data-target="#datetimepicker1"
+                                    data-toggle="datetimepicker">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <div class="input-group date  btn-file">
+
+                                    <input type="text" id="_attachmentName" class="form-control datetimepicker-input">
+                                    <div class="input-group-append">
+                                        <label for="attachmentName" class="input-group-text">
+                                            <i class="fa fa-paperclip fa-1.2x" aria-hidden="true"></i>
+                                            <input type="file" id="attachmentName" name="attachmentName"
+                                                style="display: none">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <select class="browser-default custom-select" id="terminal-list">
+                                <option selected>Select terminal for printing</option>
+                                <option value="1" type="number">1</option>
+                                <option value="2">3</option>
+                                <option value="3">4</option>
+                            </select>
+                            <br>
+                            <br>
+                            <button type="submit" value="Submit" class="btn btn-dark submit-form">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- </div> -->
+            <script>
+                $('.submit-form').on('click', function () {
+
+                    // alert($("#datetimepicker1").find("input").val());
+                    // alert($("#_attachmentName").val());
+                    // alert($("#terminal-list").val());
+                    var fileInfo = new Object();
+                    fileInfo.printingdate = $("#datetimepicker1").find("input").val();
+                    fileInfo.idprinter = parseInt($("#terminal-list").val());
+                    fileInfo.filename = $("#_attachmentName").val();
+
+                    var json = JSON.stringify(fileInfo);
+                    var fileInput = document.getElementById('attachmentName');
+                    var file = fileInput.files[0];
+                    var formData = new FormData();
+                    formData.append('json', json);
+                    formData.append('uploadfile', file);
+
+                    $.ajax({
+                        url: 'fileUpload',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        processData: false,
+                        success: function (response) {
+                            alert(response);
+                        }
+                    });
+
+                });
+            </script>
 
 
-<script>
-    $(function () {
-        $("#datetimepicker1").datetimepicker();
-    });
-</script>
 
 
-<script>
-    var fileExtentionRange = '.zip .rar .tar .pdf .doc .docx .xls .xlsx .ppt .pptx';
-    var MAX_SIZE = 3; // MB
 
-    $(document).on('change', '.btn-file :file', function() {
-        var input = $(this);
 
-        if (navigator.appVersion.indexOf("MSIE") != -1) { // IE
-            var label = input.val();
 
-            input.trigger('fileselect', [ 1, label, 0 ]);
-        } else {
-            var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            var numFiles = input.get(0).files ? input.get(0).files.length : 1;
-            var size = input.get(0).files[0].size;
 
-            input.trigger('fileselect', [ numFiles, label, size ]);
-        }
-    });
 
-    $('.btn-file :file').on('fileselect', function(event, numFiles, label, size) {
-        $('#attachmentName').attr('name', 'attachmentName'); // allow upload.
 
-        var postfix = label.substr(label.lastIndexOf('.'));
-        if (fileExtentionRange.indexOf(postfix.toLowerCase()) > -1) {
-            if (size > 1024 * 1024 * MAX_SIZE ) {
-                alert('max size：<strong>' + MAX_SIZE + '</strong> MB.');
 
-                $('#attachmentName').removeAttr('name'); // cancel upload file.
-            } else {
-                $('#_attachmentName').val(label);
-            }
-        } else {
-            alert('file type：<br/> <strong>' + fileExtentionRange + '</strong>');
 
-            $('#attachmentName').removeAttr('name'); // cancel upload file.
-        }
-    });
-</script>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <script>
+                $('.custom-file-input').on('change', function () {
+                    let fileName = $(this).val().split('\\').pop();
+                    $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+                });
+                $(function () {
+                    $("#datetimepicker1").datetimepicker();
+                });
+            </script>
+
+
+            <script>
+                var fileExtentionRange = '.zip .rar .tar .pdf .doc .docx .xls .xlsx .ppt .pptx';
+                var MAX_SIZE = 3; // MB
+
+                $(document).on('change', '.btn-file :file', function () {
+                    var input = $(this);
+
+                    if (navigator.appVersion.indexOf("MSIE") != -1) { // IE
+                        var label = input.val();
+
+                        input.trigger('fileselect', [1, label, 0]);
+                    } else {
+                        var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        var numFiles = input.get(0).files ? input.get(0).files.length : 1;
+                        var size = input.get(0).files[0].size;
+
+                        input.trigger('fileselect', [numFiles, label, size]);
+                    }
+                });
+
+                $('.btn-file :file').on('fileselect', function (event, numFiles, label, size) {
+                    $('#attachmentName').attr('name', 'attachmentName'); // allow upload.
+
+                    var postfix = label.substr(label.lastIndexOf('.'));
+                    if (fileExtentionRange.indexOf(postfix.toLowerCase()) > -1) {
+                        if (size > 1024 * 1024 * MAX_SIZE) {
+                            alert('max size：<strong>' + MAX_SIZE + '</strong> MB.');
+
+                            $('#attachmentName').removeAttr('name'); // cancel upload file.
+                        } else {
+                            $('#_attachmentName').val(label);
+                        }
+                    } else {
+                        alert('file type：<br/> <strong>' + fileExtentionRange + '</strong>');
+
+                        $('#attachmentName').removeAttr('name'); // cancel upload file.
+                    }
+                });
+            </script>
+        </div>
 
 </body>
+
 </html>
