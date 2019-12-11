@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MonoPrinter</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="/libs/semantic/semantic.css">
+    <script src="/libs/semantic/semantic.js"></script> -->
+    <!-- MDB -->
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"
+        integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+        integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+        integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+
+            <!-- pickadate -->
+    <link rel="stylesheet" href="/public/html/pt/themes/default.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.date.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.time.css" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="/public/css/index.css" crossorigin="anonymous" />
+
+    <script src="/public/html/pt/picker.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.time.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.date.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-success" href="index.html" >PrintBox</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="signin.html">Sign In <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="signup.html">Sign Up <span class="sr-only">(current)</span></a>
+                </li>
+
+
+
+            </ul>
+                    </div>
+                </div>
+        </div>
+
+    </nav>
+
+
+
+            <!-- </div> -->
+            <script>
+               function set_error_message(text){
+                    var m = document.getElementById("error-message")
+                    m.style.visibility = "visible";
+                    if (text == "" ){
+                        m.style.visibility = "hidden";
+                    }
+                    m.innerHTML = text;
+
+                }
+                function set_success_message(text){
+                    var m = document.getElementById("success-message")
+                    m.style.visibility = "visible";
+                    if (text == "" ){
+                        m.style.visibility = "hidden";
+                    }
+                    m.innerHTML = text;
+
+                }
+                function setup_from(){
+                    $('#signin').on('click', function () {
+
+                    var loginData = new Object();
+                    loginData.username = $("#input-username").val();
+                    loginData.password = $("#input-password").val();
+                    
+
+                    var json = JSON.stringify(loginData);
+
+                    $.ajax({
+                        url: 'http://127.0.0.1:9999/api/signin',
+                        type: 'POST',
+                        data: json,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'application/json',
+                        processData: false,
+                        success: function (response) {
+                            if (response === ""){
+                                set_error_message("")
+                                set_success_message("You seccessful sign in")
+                                location.replace("userpage.html")
+                            }
+                        },
+                        xhrFields: { withCredentials:true },
+                        error: function (jqXHR, exception) {
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 401) {
+                                msg = 'Bad password or username<br>If you are not registered please first do it';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            set_success_message("")
+                            set_error_message(msg);
+
+                        },
+                    });
+
+                });
+                }
+                set_error_message("")
+                set_success_message("")
+                setup_from()
+                
+            </script>
+
+        </div>
+
+</body>
+
+</html>
