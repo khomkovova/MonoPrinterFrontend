@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MonoPrinter</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="/libs/semantic/semantic.css">
+    <script src="/libs/semantic/semantic.js"></script> -->
+    <!-- MDB -->
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"
+        integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+        integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+        integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+
+            <!-- pickadate -->
+    <link rel="stylesheet" href="/public/html/pt/themes/default.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.date.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.time.css" crossorigin="anonymous" />
+
+    <script src="/public/html/pt/picker.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.time.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.date.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-success" href="index.html" >PrintBox</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Info <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Support <span class="sr-only">(current)</span></a>
+                </li>
+
+
+
+            </ul>
+                    </div>
+                </div>
+        </div>
+
+    </nav>
+
+    <div class="container " id="container-send-file" >
+        <div class="row" >
+            <div class="col-sm-6" style="margin:0 auto">
+                <br>
+                <div class="card" >
+                    <h3 class="display-6  card-header info-color text-center py-4">Sign Up</h3>
+                    <div class="card-body">
+                        <div class="form-group">
+<!--                          <form >
+                              <div class="form-group">
+                                <label for="input-username">Username</label>
+                                <input type="text" class="form-control" id="input-username"  placeholder="">
+                              </div>
+                              <div class="form-group">
+                                <label for="input-password">Password</label>
+                                <input type="password" class="form-control" id="input-password" placeholder="">
+                              </div>
+                              
+                            </form>
+                            <button type="submit" value="SighIn" id="signin"class="btn btn-dark submit-form">Sign In</button>
+ -->
+                                <form>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                     </div>
+                                    <input name="" class="form-control"  id="input-username" placeholder="Username" type="text">
+                                </div> <!-- form-group// -->
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                     </div>
+                                    <input name="" class="form-control" id="input-email" placeholder="Email address" type="email">
+                                </div> <!-- form-group// -->
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                                    </div>
+                                    <select class="custom-select" id="input-numberphone-code" style="max-width: 120px;">
+                                        <option value="+380" selected="">+380</option>
+                                        <option value="+380">+380</option>
+                                    </select>
+                                    <input name="" class="form-control" id="input-numberphone" placeholder="Phone number" type="text">
+                                </div> <!-- form-group// -->
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                    </div>
+                                    <input class="form-control" id="input-password" placeholder="Create password" type="password">
+                                </div> <!-- form-group// -->
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                    </div>
+                                    <input class="form-control" id="input-repeate-password" placeholder="Repeat password" type="password">
+                                </div> <!-- form-group// -->                                        
+                                                                                                 
+                            </form>
+                            <button type="submit" value="SighUp" id="signup"class="btn btn-dark submit-form">Sign Up</button>
+                            <p class="text-center">Do you have account? <a href="signin.html">Log In</a> </p>
+
+                            <div class="alert alert-danger" role="alert" id="error-message"> </div>
+
+                            <div class="alert alert-success" role="alert" id="success-message"> </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- </div> -->
+            <script>
+               function set_error_message(text){
+                    var m = document.getElementById("error-message")
+                    m.style.visibility = "visible";
+                    if (text == "" ){
+                        m.style.visibility = "hidden";
+                    }
+                    m.innerHTML = text;
+
+                }
+                function set_success_message(text){
+                    var m = document.getElementById("success-message")
+                    m.style.visibility = "visible";
+                    if (text == "" ){
+                        m.style.visibility = "hidden";
+                    }
+                    m.innerHTML = text;
+
+                }
+                function setup_from(){
+                    $('#signup').on('click', function () {
+
+                    var signupData = new Object();
+                    signupData.username = $("#input-username").val();
+                    signupData.email = $("#input-email").val();
+                    signupData.numberphone = $("#input-numberphone-code").val() + $("#input-numberphone").val();
+                    signupData.password = $("#input-password").val();
+                    if (signupData.password != $("#input-repeate-password").val()){
+                        set_error_message("Repeat password should be equal password");
+                        set_success_message("")
+                        return
+                    }
+                    else{
+                        set_error_message("");
+                    }
+
+                    if (signupData.email == ""){
+                        set_error_message("Please check email adress");
+                        set_success_message("")
+                        return
+
+                    }
+                    if (signupData.numberphone == "" || signupData.numberphone.length != 13){
+                        set_error_message("Please check phone number");
+                        set_success_message("")
+                        return
+
+                    }
+                    // signupData.username = $("#input-repeate-password").val();
+                    // signupData.password = $("#input-password").val();
+                    
+
+                    var json = JSON.stringify(signupData);
+
+                    $.ajax({
+                        url: 'http://127.0.0.1:9999/api/signup',
+                        type: 'POST',
+                        data: json,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'application/json',
+                        processData: false,
+                        success: function (response) {
+                            if (response === "You success registered"){
+                                set_error_message("")
+                                set_success_message("You seccessfully sign up.")
+                                // location.replace("userpage.html")
+                                return
+                            }
+                            if (response === "This users is registered"){
+                                set_success_message("")
+                                set_error_message("This username is using please change username")
+                                return
+                            }
+                            set_success_message("")
+                            set_error_message("Some thing bad please check your date and try again")
+                        },
+                        xhrFields: { withCredentials:true },
+                        error: function (jqXHR, exception) {
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            // } else if (jqXHR.status == 401) {
+                            //     msg = 'Bad password or username<br>If you are not registered please do it here <a href="signup.html" class="stretched-link">Sign Up</a>';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            set_success_message("")
+                            set_error_message(msg);
+
+                        },
+                    });
+
+                });
+                }
+                set_error_message("")
+                set_success_message("")
+                setup_from()
+                
+            </script>
+
+        </div>
+
+</body>
+
+</html>

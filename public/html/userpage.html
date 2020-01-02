@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Title</title>
+    <title>MonoPrinter</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- <link rel="stylesheet" type="text/css" href="/libs/semantic/semantic.css">
     <script src="/libs/semantic/semantic.js"></script> -->
@@ -36,11 +36,20 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
         integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+
+            <!-- pickadate -->
+    <link rel="stylesheet" href="/public/html/pt/themes/default.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.date.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/public/html/pt/themes/default.time.css" crossorigin="anonymous" />
+
+    <script src="/public/html/pt/picker.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.time.js" crossorigin="anonymous"></script>
+    <script src="/public/html/pt/picker.date.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand text-success" >PrintBox</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,52 +58,51 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="userpage.html">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="history.html">History</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="delete_file.html">Delete File</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="add_pages.html">Add pages</a>
                 </li>
+
+
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                     <div class=" navbar-nav nav-item dropdown ">
+
+                    <a class="nav-link dropdown-toggle btn btn-outline-success" href="#" id="navbarDropdown" role="button"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                        <i class="fa fa-user" ></i></a>
+
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <ul class="list-group list-group-flush" id="user-info-dropmenu">
+                            <li class="list-group-item">
+                                <a class="text-secondary" href="index.html">Log out</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="text-secondary" href="signin.html">Sign In</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
         </div>
+
     </nav>
 
     <div class="container " id="container-send-file">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="margin:0 auto">
                 <br>
                 <div class="card">
-                    <h3 class="display-6  card-header info-color text-center py-4">Add new file for printing</h3>
+                    <h3 class="display-6  card-header info-color text-center py-4">New file</h3>
                     <div class="card-body">
                         <div class="form-group">
-                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input"
-                                    data-target="#datetimepicker1" />
-                                <div class="input-group-append" data-target="#datetimepicker1"
-                                    data-toggle="datetimepicker">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
                             <br>
                             <div class="field">
                                 <div class="input-group date  btn-file">
@@ -112,52 +120,26 @@
                             <br>
 
                             <select class="browser-default custom-select" id="terminal-list">
-                                <option selected>Select terminal for printing</option>
+                                <option value="1" selected>Select terminal for printing</option>
                                 <option value="1" type="number">1</option>
-                                <option value="2">3</option>
-                                <option value="3">4</option>
+
                             </select>
                             <br>
                             <br>
-                            <div class="container">
-                                <div class="row">
-                                    <select class="browser-default custom-select col" id="printing-day">
-                                        <option selected>Day</option>
-                                        <option value="1" type="number">1</option>
-                                        <option value="2">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-
-                                    <select class="browser-default custom-select col" id="printing-hour">
-                                        <option selected>Hour</option>
-                                        <option value="1" type="number">1</option>
-                                        <option value="2">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-                                    <select class="browser-default custom-select col" id="printing-minut">
-                                        <option selected>Minute</option>
-                                        <option value="1" type="number">1</option>
-                                        <option value="2">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-                                    <select class="browser-default custom-select col" id="printing-second">
-                                        <option selected>Second</option>
-                                        <option value="1" type="number">1</option>
-                                        <option value="2">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-
-                                </div>
-                            </div>
+                                <form>
+                                    <fieldset>
+                                        <input id="input_from time-picker" class="datepicker custom-select" type="time" name="time" >
+                                    </fieldset>
+                                </form>
 
                             <br>
                             <br>
                             <button type="submit" value="Submit" class="btn btn-dark submit-form">Submit</button>
                             <br>
                             <br>
-                            <div class="alert alert-danger" role="alert">
-                                This is a danger alert—check it out!
-                            </div>
+                            <div class="alert alert-danger" role="alert" id="error-message"> </div>
+                            <div class="alert alert-success" role="alert" id="success-message"> </div>
+                        </div>
                         </div>
 
                     </div>
@@ -167,16 +149,150 @@
 
             <!-- </div> -->
             <script>
-                $('.submit-form').on('click', function () {
+            function set_success_message(text){
+                    var m = document.getElementById("success-message")
+                    m.style.visibility = "visible";
+                    if (text == "" ){
+                        m.style.visibility = "hidden";
+                    }
+                    m.innerHTML = text;
 
-                    // alert($("#datetimepicker1").find("input").val());
-                    // alert($("#_attachmentName").val());
-                    // alert($("#terminal-list").val());
+                }
+            function setup_time_picker(busy_time){
+                // var busy_time  = ["2019-12-02T22:45:36", "2019-12-02T22:48:36"]
+                // var busy_time  = get_busy_time()
+                var picker = ""
+                var busy_date = new Array();
+                function addMinutes(date, minutes) {
+                    return new Date(date.getTime() + minutes*60000);
+                }
+                for (var i = 0; i < busy_time .length; i ++ ){
+                    var d = new Date(busy_time[i]);
+                    busy_date.push(d);
+                    
+                }
+
+                console.log(busy_date)
+                
+                // var $input = $( '.datepicker' ).pickatime({
+                //     clear : ""
+                //     // max: [22,0]
+                // })
+                var $input = $( '.datepicker' ).pickatime({
+                    format: 'HH:i',
+                    formatLabel: '<b>HH</b>:i',
+                    formatSubmit: 'HH:i',
+                    interval: 1,
+                    // disable: busy_date,
+                    min: addMinutes(new Date, 6),
+
+                    // max: [22,0]
+                })
+                var picker = $input.pickatime('picker')
+                // picker.set('select', [3,0])
+                var d = new Date(); // for now
+                var h = d.getHours(); // => 9
+                var m = d.getMinutes(); // =>  30
+                var s = d.getSeconds(); //
+                picker.set('select', h + '-' + m, { format: 'HH-i' })
+                
+                picker.set('enable', true);
+                picker.set('disable', busy_date)
+                // console.log(picker.get())
+            }
+
+            function setup_terminal_select(){
+                document.getElementById("terminal-list").onchange = function() {
+                    var terminal_id = this.value;
+                    var busy_time = get_busy_time(terminal_id)
+            // console.log(busy_time)
+                    setup_time_picker(busy_time)
+                };
+                function selectElement(id, valueToSelect) {  
+                    var sel = document.getElementById(id);  
+                    var opt = document.createElement('option');
+
+                    // create text node to add to option element (opt)
+                    opt.appendChild( document.createTextNode(valueToSelect) );
+
+                    // set value property of opt
+                    opt.value = valueToSelect; 
+
+                    // add opt to end of select box (sel)
+                    sel.appendChild(opt); 
+                    // document.getElementById(id).appendChild( document.createTextNode(valueToSelect) )
+                    
+                }
+                
+                selectElement('terminal-list', '2')
+                selectElement('terminal-list', '3')
+                selectElement('terminal-list', '5')
+
+
+            }
+
+            function set_error_message(text){
+                var m = document.getElementById("error-message")
+                m.style.visibility = "visible";
+                if (text == "" ){
+                    m.style.visibility = "hidden";
+                }
+                m.innerHTML = text;
+
+            }
+
+            function get_print_time(){
+                // var TIME_ZONE_PLUS = 2
+                var time = $(".datepicker").val()
+                var d = new Date(); // for now
+                d.setHours(parseInt(time.substring(0,2)))
+                d.setMinutes(time.substring(3,5))
+                return d.toISOString().substring(0,19)
+            }
+
+            function feel_dropdown(text){
+                // console.log(text)
+                var data = JSON.parse(text);
+
+                $("#user-info-dropmenu").append('<li class="list-group-item">Username<br>' + data["username"] + '</li>');
+                $("#user-info-dropmenu").append('<li class="list-group-item">Email<br>' + data["email"] + '</li>');
+                $("#user-info-dropmenu").append('<li class="list-group-item">Phone Number<br>' + data["numberphone"] + '</li>');
+                $("#user-info-dropmenu").append('<li class="list-group-item">Pages<br>' + data["numberpages"] + '</li>');
+
+            }
+
+            function setup_dropdown(){
+                    $.ajax({
+                        url: 'http://127.0.0.1:9999/api/getshortuserinfo',
+                        type: 'GET',
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        processData: false,
+                        success: function (response) {
+                            // console.log(response);
+                            if (response == "Bad cookies"){
+                                set_error_message("Your session is not active.")
+                            }
+                            feel_dropdown(response)
+                        },
+                        xhrFields: { withCredentials:true }
+                    });
+            }
+
+            function setup_from(){
+                $('.submit-form').on('click', function () {
+                    // console.log(get_print_time())
+
                     var fileInfo = new Object();
-                    fileInfo.printingdate = $("#datetimepicker1").find("input").val();
+                    fileInfo.printingdate = get_print_time()
                     fileInfo.idprinter = parseInt($("#terminal-list").val());
                     fileInfo.filename = $("#_attachmentName").val();
-
+                    if(fileInfo.filename == ""){
+                        set_error_message("Please check file")
+                        return
+                    }
                     var json = JSON.stringify(fileInfo);
                     var fileInput = document.getElementById('attachmentName');
                     var file = fileInput.files[0];
@@ -185,7 +301,7 @@
                     formData.append('uploadfile', file);
 
                     $.ajax({
-                        url: 'fileUpload',
+                        url: 'http://127.0.0.1:9999/api/uploadfile',
                         type: 'POST',
                         data: formData,
                         async: false,
@@ -194,11 +310,102 @@
                         enctype: 'multipart/form-data',
                         processData: false,
                         success: function (response) {
-                            alert(response);
-                        }
+                            if (response == "Success upload"){
+                                set_success_message("The file is successfully uploaded");
+                                set_error_message("");
+                            }else{
+                                set_error_message(response);
+                            }
+                            // console.log(response);
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 401) {
+                                msg = 'Bad password or username<br>If you are not registered please first do it';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            set_success_message("")
+                            set_error_message(msg);
+
+                        },
+                        xhrFields: { withCredentials:true }
+
                     });
 
                 });
+            }
+            function get_busy_time(terminal_id){
+                var result = []
+                $.ajax({
+                        url: 'http://127.0.0.1:9999/api/busytime',
+                        type: 'GET',
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        processData: false,
+                        success: function (response) {
+                            // console.log(response);
+                            // console.log(response)
+                            var data = JSON.parse(response);
+                            data.forEach(function(file){
+                                if(terminal_id == file["IdPrinter"]){
+                                    // console.log(file["PrintingDate"]);
+                                    result.push(file["PrintingDate"] + "Z")
+                                    return(result)
+                                }   
+
+                            });   
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 401) {
+                                msg = 'Bad password or username<br>If you are not registered please first do it';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            set_success_message("")
+                            set_error_message(msg);
+
+                        },
+                        xhrFields: { withCredentials:true }
+                    });
+                return result
+            }
+
+           
+            setup_terminal_select()
+            set_error_message("")
+            set_success_message("")
+            setup_from()
+            setup_dropdown()
+
+                
             </script>
 
 
