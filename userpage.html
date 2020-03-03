@@ -250,9 +250,9 @@
                 return d.toISOString().substring(0,19)
             }
 
-            function feel_dropdown(text){
+            function feel_dropdown(data){
                 // console.log(text)
-                var data = JSON.parse(text);
+                // var data = JSON.parse(text);
 
                 $("#user-info-dropmenu").append('<li class="list-group-item">Username<br>' + data["username"] + '</li>');
                 $("#user-info-dropmenu").append('<li class="list-group-item">Email<br>' + data["email"] + '</li>');
@@ -263,7 +263,7 @@
 
             function setup_dropdown(){
                     $.ajax({
-                        url: 'http://127.0.0.1:9999/api/getshortuserinfo',
+                        url: 'http://localhost:9999/api/getshortuserinfo',
                         type: 'GET',
                         async: false,
                         cache: false,
@@ -271,11 +271,16 @@
                         enctype: 'multipart/form-data',
                         processData: false,
                         success: function (response) {
-                            // console.log(response);
-                            if (response == "Bad cookies"){
-                                set_error_message("Your session is not active.")
-                            }
-                            feel_dropdown(response)
+                                // console.log(response);
+                                var obj = JSON.parse(response)
+                                // remove_form()
+                                console.log(obj)
+                                if (obj.status === "ok"){
+                                    feel_dropdown(obj.data)
+                                }else{
+                                    set_error_message(obj.status_description)
+                                    set_success_message("")
+                                }
                         },
                         xhrFields: { withCredentials:true }
                     });
@@ -301,7 +306,7 @@
                     formData.append('uploadfile', file);
 
                     $.ajax({
-                        url: 'http://127.0.0.1:9999/api/uploadfile',
+                        url: 'http://localhost:9999/api/uploadfile',
                         type: 'POST',
                         data: formData,
                         async: false,
@@ -310,36 +315,17 @@
                         enctype: 'multipart/form-data',
                         processData: false,
                         success: function (response) {
-                            if (response == "Success upload"){
-                                set_success_message("The file is successfully uploaded");
-                                set_error_message("");
-                            }else{
-                                set_error_message(response);
-                            }
-                            // console.log(response);
-                        },
-                        error: function (jqXHR, exception) {
-                            var msg = '';
-                            if (jqXHR.status === 0) {
-                                msg = 'Not connect.\n Verify Network.';
-                            } else if (jqXHR.status == 404) {
-                                msg = 'Requested page not found. [404]';
-                            } else if (jqXHR.status == 401) {
-                                msg = 'Bad password or username<br>If you are not registered please first do it';
-                            } else if (jqXHR.status == 500) {
-                                msg = 'Internal Server Error [500].';
-                            } else if (exception === 'parsererror') {
-                                msg = 'Requested JSON parse failed.';
-                            } else if (exception === 'timeout') {
-                                msg = 'Time out error.';
-                            } else if (exception === 'abort') {
-                                msg = 'Ajax request aborted.';
-                            } else {
-                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                            }
-                            set_success_message("")
-                            set_error_message(msg);
-
+                                // console.log(response);
+                                var obj = JSON.parse(response)
+                                // remove_form()
+                                console.log(obj)
+                                if (obj.status === "ok"){
+                                    set_error_message("")
+                                    set_success_message(obj.status_description)
+                                }else{
+                                    set_error_message(obj.status_description)
+                                    set_success_message("")
+                                }
                         },
                         xhrFields: { withCredentials:true }
 
@@ -350,7 +336,7 @@
             function get_busy_time(terminal_id){
                 var result = []
                 $.ajax({
-                        url: 'http://127.0.0.1:9999/api/busytime',
+                        url: 'http://localhost:9999/api/busytime',
                         type: 'GET',
                         async: false,
                         cache: false,
@@ -360,38 +346,24 @@
                         success: function (response) {
                             // console.log(response);
                             // console.log(response)
-                            var data = JSON.parse(response);
-                            data.forEach(function(file){
-                                if(terminal_id == file["IdPrinter"]){
-                                    // console.log(file["PrintingDate"]);
-                                    result.push(file["PrintingDate"] + "Z")
-                                    return(result)
-                                }   
 
-                            });   
-                        },
-                        error: function (jqXHR, exception) {
-                            var msg = '';
-                            if (jqXHR.status === 0) {
-                                msg = 'Not connect.\n Verify Network.';
-                            } else if (jqXHR.status == 404) {
-                                msg = 'Requested page not found. [404]';
-                            } else if (jqXHR.status == 401) {
-                                msg = 'Bad password or username<br>If you are not registered please first do it';
-                            } else if (jqXHR.status == 500) {
-                                msg = 'Internal Server Error [500].';
-                            } else if (exception === 'parsererror') {
-                                msg = 'Requested JSON parse failed.';
-                            } else if (exception === 'timeout') {
-                                msg = 'Time out error.';
-                            } else if (exception === 'abort') {
-                                msg = 'Ajax request aborted.';
-                            } else {
-                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            var obj = JSON.parse(response)
+                            // remove_form()
+                            console.log(obj)
+                            if (obj.status === "ok"){
+                                var data = obj.data;
+                                data.forEach(function(file){
+                                    if(terminal_id == file["IdPrinter"]){
+                                        // console.log(file["PrintingDate"]);
+                                        result.push(file["PrintingDate"] + "Z")
+                                        return(result)
+                                    }   
+
+                                });   
+                            }else{
+                                set_error_message(obj.status_description)
+                                set_success_message("")
                             }
-                            set_success_message("")
-                            set_error_message(msg);
-
                         },
                         xhrFields: { withCredentials:true }
                     });

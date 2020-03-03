@@ -95,27 +95,34 @@
 
     </nav>
 
-    <div class="container " id="container-send-file">
+        <div class="container " id="container-send-file">
         <div class="row">
-            <div class="col-sm-6" style="margin:0 auto">
+            <div class="col-sm-9" style="margin:0 auto">
                 <br>
                 <div class="card">
-                    <h3 class="display-6  card-header info-color text-center py-4">Add pages</h3>
+                    <h3 class="display-6  card-header info-color text-center py-4">History</h3>
                     <div class="card-body">
-                        <div class="form-group" id="add_pages_form">
-                            <form >
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"></span>
-                                     </div>
-                                    <input name="" class="form-control"  id="input-count-pages" placeholder="Please write how many pages you want to add." type="text">
-                                </div> <!-- form-group// -->
-                                                       
-                            </form>
-                            <button type="submit" value="add_pages" id="add_pages"class="btn btn-dark submit-form">Submit</button>
+                        <div class="form-group">
+                            <div class="table-responsive">
+                            <table class="table" id="table-files">
+                                
+                                  <thead class="thead-dark">
+                                    <tr>
+                                      <th scope="col">Filename</th>
+                                      <th scope="col">Printing Date</th>
+                                      <th scope="col">Page Number</th>
+                                      <th scope="col">Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                                </table>
+
+                            <button type="submit" value="Submit" class="btn btn-dark submit-form">Submit</button>
+                            <br>
+                            <br>
                             <div class="alert alert-danger" role="alert" id="error-message"> </div>
-                            <div class="alert alert-success" role="alert" id="success-message"> </div>
-                        </div>
+                            
                         </div>
 
                     </div>
@@ -123,26 +130,9 @@
 
             </div>
 
+
             <!-- </div> -->
             <script>
-            function b64DecodeUnicode(str) {
-                // Going backwards: from bytestream, to percent-encoding, to original string.
-                return decodeURIComponent(atob(str).split('').map(function(c) {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
-            }
-
-            function set_success_message(text){
-                    var m = document.getElementById("success-message")
-                    m.style.visibility = "visible";
-                    if (text == "" ){
-                        m.style.visibility = "hidden";
-                    }
-                    m.innerHTML = text;
-
-                }
-            
-
             function set_error_message(text){
                 var m = document.getElementById("error-message")
                 m.style.visibility = "visible";
@@ -153,56 +143,53 @@
 
             }
 
-            function add_liqpay_button(data, signature){
-                console.log("data = ") 
-                console.log(data)
-                var d = b64DecodeUnicode(data)
-                var obj = JSON.parse(d)
+            
+            function feel_table(text){
+                var data = JSON.parse(text);
+                data = data.data
+                var files = data["files"]
+                var table = document.getElementById("table-files");
+                console.log(files)
+                files.reverse();
+                files.forEach(function(file){
+                
+                // Create an empty <tr> element and add it to the 1st position of the table:
+                var row = table.insertRow();
 
-                var m = document.getElementById("add_pages_form")
-                text = '<form method="POST" style="text-align: center;" accept-charset="utf-8" action="https://www.liqpay.ua/api/3/checkout">     <input type="hidden" name="data" value="' + data + '" />     <input type="hidden" name="signature" value="' + signature + '" />     <button style="border: none !important; display:inline-block !important;text-align: center !important;padding: 7px 20px !important; margin: 0 auto;       color: #fff !important; font-size:16px !important; font-weight: 600 !important; font-family:OpenSans, sans-serif; cursor: pointer !important; border-radius: 2px !important;         background: rgb(122,183,43) !important;"onmouseover="this.style.opacity=\"0.5\";" onmouseout="this.style.opacity=\"1\";">         <img src="https://static.liqpay.ua/buttons/logo-small.png" name="btn_text"             style="margin-right: 7px !important; vertical-align: middle !important;"/>         <span style="vertical-align:middle; !important">Pay ' + obj.amount + ' ' + obj.currency + '</span>     </button> </form>';
-                m.innerHTML = text;
+                // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                var filename_cell = row.insertCell(0);
+                var date_cell = row.insertCell(1);
+                var pages_cell = row.insertCell(2);
+                var status_cell = row.insertCell(3);
+                
+
+                // Add some text to the new cells:
+                filename_cell.innerHTML = file["Filename"];
+                date_cell.innerHTML = file["PrintingDate"];
+                pages_cell.innerHTML = file["NumberPage"];
+                status_cell.innerHTML = file["Status"];
+                    
+                });
             }
-
-            function setup_from(){
-                $('#add_pages').on('click', function () {
-
-                    var formData = new Object();
-                    formData.countPage = parseInt($("#input-count-pages").val());
-                    var json = JSON.stringify(formData);
+            function setup_table(){
                     $.ajax({
-                        url: 'http://localhost:9999/api/liqpaydata',
-                        type: 'POST',
-                        data: json,
+                        url: 'http://localhost:9999/api/getshortuserinfo',
+                        type: 'GET',
                         async: false,
                         cache: false,
                         contentType: false,
                         enctype: 'multipart/form-data',
                         processData: false,
                         success: function (response) {
-                            console.log(response);
-                            var obj = JSON.parse(response)
-                            // remove_form()
-                            console.log(obj)
-                            if obj.status === "ok"{
-                            
-                            add_liqpay_button(obj.data.data, obj.data.signature)
-                        }else{
-                            set_error_message(obj.status_description)
-                            set_success_message("")
-                        }
-
+                            // console.log(response);
+                            feel_table(response)
                         },
-                        xhrFields: { withCredentials:true },
-
+                        xhrFields: { withCredentials:true }
                     });
-
-                });
             }
+           
             set_error_message("")
-            set_success_message("")
-            setup_from()
-
+            setup_table()
 
                 
             </script>
