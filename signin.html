@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="489159989600-lc9jrk41doi39l16t2j07m991ivs3nml.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="542995381087-rhce77qftigh6ef30uqln41al77pu9jp.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <title>MonoPrinter</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -128,8 +128,9 @@
 
                     var json = JSON.stringify(loginData);
                     document.cookie = "token=" + id_token;
+                    document.cookie = "token=" + id_token + ";domain=.drukbox.club";
                     $.ajax({
-                        url: 'http://localhost:9999/api/signin/google',
+                        url: 'https://api2.drukbox.club/api/signin/google',
                         type: 'POST',
                         data: json,
                         async: false,
@@ -138,20 +139,13 @@
                         enctype: 'application/json',
                         processData: false,
                         success: function (response) {
-                            // var obj = JSON.parse(response)
-                            // if (obj.status === "ok"){
-                            //     set_error_message("")
-                            //     set_success_message(obj.status_descriptions)
-                                
-                            // }
-                            // set_success_message("")
-                            // set_error_message(response);
-                            location.replace("userpage.html")
+                        location.replace("userpage.html")
+                            
                         },
                         xhrFields: { withCredentials:true },
                         error: function (jqXHR, exception) {
                             set_success_message("")
-                            set_error_message(jqXHR.responseText);
+                            set_error_message("Can't connect to server");
 
                         },
                     });
