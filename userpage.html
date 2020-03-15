@@ -29,6 +29,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
     <link href="/public/css/carosel.css" rel="stylesheet">
     <link href="/public/css/footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/v4-shims.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="/public/html/pt/picker.js" crossorigin="anonymous"></script>
     <script src="/public/html/pt/picker.time.js" crossorigin="anonymous"></script>
     <script src="/public/html/pt/picker.date.js" crossorigin="anonymous"></script>
@@ -107,6 +111,9 @@
                                     </select>
                                     <br>
                                     <br>
+                                    <input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-width="100%" data-onstyle="success" data-offstyle="warning" data-on="<div><i class='far fa-calendar-alt'></i>  Today</div>" data-off="<div><i class='far fa-calendar-alt'></i>  Tomorow</div>">
+                                    <br>
+                                    <br>
                                     <form>
                                         <fieldset>
                                             <input id="input_from time-picker" class="datepicker custom-select" type="time" name="time">
@@ -146,7 +153,6 @@
             </div>
         </div>
     </footer>
-    <!-- </div> -->
     <script>
     function sleep(time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -206,6 +212,14 @@
 
     }
 
+    function setup_toggle(){
+        $('#toggle-event').change(function() {
+            var terminal_id = document.getElementById("terminal-list").value;
+            // var busy_time = get_busy_time(terminal_id)
+            // console.log(busy_time)
+            setup_time_picker(window.busy_time)
+        });
+    }
     function setup_time_picker(busy_time) {
         // var busy_time  = ["2019-12-02T22:45:36", "2019-12-02T22:48:36"]
         // var busy_time  = get_busy_time()
@@ -217,7 +231,15 @@
         }
         for (var i = 0; i < busy_time.length; i++) {
             var d = new Date(busy_time[i]);
-            busy_date.push(d);
+            var date_busy = new Date();
+            var today_tomorow = $('#toggle-event').prop('checked')
+            // var d = new Date(); // for now
+            if (today_tomorow == false) {
+                date_busy.setDate(date_busy.getDate() + 1);
+            }
+            if (d.getDate() == date_busy.getDate()) {
+                busy_date.push(d);
+            }
 
         }
 
@@ -252,8 +274,8 @@
 
     function setup_terminal_select() {
         document.getElementById("terminal-list").onchange = function() {
-            var terminal_id = this.value;
-            var busy_time = get_busy_time(terminal_id)
+            var terminal_id = document.getElementById("terminal-list").value;
+            window.busy_time = get_busy_time(terminal_id)
             // console.log(busy_time)
             setup_time_picker(busy_time)
         };
@@ -294,7 +316,12 @@
     function get_print_time() {
         // var TIME_ZONE_PLUS = 2
         var time = $(".datepicker").val()
+        var today_tomorow = $('#toggle-event').prop('checked')
         var d = new Date(); // for now
+        if (today_tomorow == false) {
+            d.setDate(d.getDate() + 1);
+        }
+
         d.setHours(parseInt(time.substring(0, 2)))
         d.setMinutes(time.substring(3, 5))
         return d.toISOString().substring(0, 19)
@@ -347,6 +374,7 @@
             fileInfo.filename = $("#_attachmentName").val();
             if (fileInfo.filename == "") {
                 set_error_message("Please check file")
+                delete_timer_bar()
                 return
             }
 
@@ -441,6 +469,7 @@
     set_success_message("")
     // setup_from()
     setup_dropdown()
+    setup_toggle()
     // start_timer_bar()
     </script>
     <script>
