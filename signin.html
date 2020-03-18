@@ -43,7 +43,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<!--         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">Info <span class="sr-only">(current)</span></a>
@@ -52,7 +52,7 @@
                     <a class="nav-link" href="index.html">Support <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         </div>
         </div>
     </nav>
@@ -63,9 +63,13 @@
                     <div class="col-sm-6" style="margin:0 auto">
                         <br>
                         <div class="card">
+                           
+                            <br>
                             <h3 class="display-6  card-header info-color text-center py-4">Sign In</h3>
                             <div class="card-body">
+                                 <div class="alert alert-warning" role="alert" id="info-message">When you click button Sign In, you accept our <a  href="policy.html"> Policy</a></div>
                                 <div class="form-group d-flex justify-content-center">
+
                                     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="error-message"> </div>
@@ -140,7 +144,7 @@
             enctype: 'application/json',
             processData: false,
             success: function(response) {
-                gapi.auth2.getAuthInstance().disconnect().then(function () {console.log("Google oauth logout")})
+                gapi.auth2.getAuthInstance().disconnect().then(function() { console.log("Google oauth logout") })
                 location.replace("userpage.html")
 
             },

@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="field">
                                         <div class="input-group date  btn-file">
-                                            <input type="text" id="_attachmentName" class="form-control datetimepicker-input">
+                                            <input type="button" id="_attachmentName" class="form-control datetimepicker-input" onclick="$('#attachmentName').click();">
                                             <div class="input-group-append">
                                                 <label for="attachmentName" class="input-group-text">
                                                     <i class="fa fa-paperclip fa-1.2x" aria-hidden="true"></i>
@@ -106,10 +106,14 @@
                                     </div>
                                     <br>
                                     <select class="browser-default custom-select" id="terminal-list">
-                                        <option value="1" selected>Select terminal for printing</option>
-                                        <option value="1" type="number">1</option>
+                                        <option value="0" selected>Select terminal for printing</option>
                                     </select>
                                     <br>
+                                    <br>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="https://www.google.com/maps/search/DrukBox/@49.8379347,24.0168108,15z" target="_blank">Show DrukBox terminals on the maps</a>
+                                    </div>
+                                    <!-- <br> -->
                                     <br>
                                     <input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-width="100%" data-onstyle="success" data-offstyle="warning" data-on="<div><i class='far fa-calendar-alt'></i>  Today</div>" data-off="<div><i class='far fa-calendar-alt'></i>  Tomorow</div>">
                                     <br>
@@ -212,7 +216,7 @@
 
     }
 
-    function setup_toggle(){
+    function setup_toggle() {
         $('#toggle-event').change(function() {
             var terminal_id = document.getElementById("terminal-list").value;
             // var busy_time = get_busy_time(terminal_id)
@@ -220,6 +224,7 @@
             setup_time_picker(window.busy_time)
         });
     }
+
     function setup_time_picker(busy_time) {
         // var busy_time  = ["2019-12-02T22:45:36", "2019-12-02T22:48:36"]
         // var busy_time  = get_busy_time()
@@ -229,11 +234,10 @@
         function addMinutes(date, minutes) {
             return new Date(date.getTime() + minutes * 60000);
         }
+        var today_tomorow = $('#toggle-event').prop('checked')
         for (var i = 0; i < busy_time.length; i++) {
             var d = new Date(busy_time[i]);
             var date_busy = new Date();
-            var today_tomorow = $('#toggle-event').prop('checked')
-            // var d = new Date(); // for now
             if (today_tomorow == false) {
                 date_busy.setDate(date_busy.getDate() + 1);
             }
@@ -244,43 +248,40 @@
         }
 
         console.log(busy_date)
-
-        // var $input = $( '.datepicker' ).pickatime({
-        //     clear : ""
-        //     // max: [22,0]
-        // })
         var $input = $('.datepicker').pickatime({
             format: 'HH:i',
             formatLabel: '<b>HH</b>:i',
             formatSubmit: 'HH:i',
             interval: 1,
-            // disable: busy_date,
             min: addMinutes(new Date, 6),
-
-            // max: [22,0]
         })
         var picker = $input.pickatime('picker')
-        // picker.set('select', [3,0])
         var d = new Date(); // for now
         var h = d.getHours(); // => 9
         var m = d.getMinutes(); // =>  30
         var s = d.getSeconds(); //
-        picker.set('select', h + '-' + m, { format: 'HH-i' })
 
+        if (today_tomorow == false) {
+            picker.set('min', false)
+            picker.set('select', "08" + '-' + "00", { format: 'HH-i' })
+        } else {
+            picker.set('min', addMinutes(new Date, 6))
+            picker.set('select', h + '-' + m, { format: 'HH-i' })
+        }
         picker.set('enable', true);
         picker.set('disable', busy_date)
-        // console.log(picker.get())
     }
 
     function setup_terminal_select() {
         document.getElementById("terminal-list").onchange = function() {
             var terminal_id = document.getElementById("terminal-list").value;
+
             window.busy_time = get_busy_time(terminal_id)
             // console.log(busy_time)
             setup_time_picker(busy_time)
         };
 
-        function selectElement(id, valueToSelect) {
+        function selectElement(id, value, valueToSelect) {
             var sel = document.getElementById(id);
             var opt = document.createElement('option');
 
@@ -288,17 +289,21 @@
             opt.appendChild(document.createTextNode(valueToSelect));
 
             // set value property of opt
-            opt.value = valueToSelect;
+            opt.value = value;
 
             // add opt to end of select box (sel)
             sel.appendChild(opt);
             // document.getElementById(id).appendChild( document.createTextNode(valueToSelect) )
 
         }
+        var terminals = get_terminals()
+        terminals.forEach(function(terminal) {
+            selectElement('terminal-list', terminal.Name, "№ " + terminal.Name + " (" + terminal.LocationComments + ")")
+        });
 
-        selectElement('terminal-list', '2')
-        selectElement('terminal-list', '3')
-        selectElement('terminal-list', '5')
+        // selectElement('terminal-list', '1231233')
+        // selectElement('terminal-list', '3')
+        // selectElement('terminal-list', '5')
 
 
     }
@@ -344,7 +349,7 @@
         $.ajax({
             url: 'https://api2.drukbox.club/api/getshortuserinfo',
             type: 'GET',
-            async: false,
+            async: true,
             cache: false,
             contentType: false,
             enctype: 'multipart/form-data',
@@ -371,6 +376,12 @@
             var fileInfo = new Object();
             fileInfo.printingdate = get_print_time()
             fileInfo.idprinter = parseInt($("#terminal-list").val());
+            if (fileInfo.idprinter == 0) {
+                set_success_message("")
+                set_error_message("Please select terminal")
+                delete_timer_bar()
+                return
+            }
             fileInfo.filename = $("#_attachmentName").val();
             if (fileInfo.filename == "") {
                 set_error_message("Please check file")
@@ -463,6 +474,39 @@
         return result
     }
 
+    function get_terminals() {
+        var result = []
+        $.ajax({
+            url: 'https://api2.drukbox.club/api/terminal',
+            type: 'GET',
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function(response) {
+                // console.log(response);
+                // console.log(response)
+
+                var obj = JSON.parse(response)
+                // remove_form()
+                console.log(obj)
+                if (obj.status === "ok") {
+                    result = obj.data.Terminals;
+                    // data.forEach(function(terminal) {
+                    //     console.log(terminal)
+
+                    // });
+                } else {
+                    set_error_message(obj.status_description)
+                    set_success_message("")
+                }
+                return result
+            },
+            xhrFields: { withCredentials: true }
+        });
+        return result
+    }
 
     setup_terminal_select()
     set_error_message("")
