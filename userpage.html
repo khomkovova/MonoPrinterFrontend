@@ -360,7 +360,7 @@
                 // remove_form()
                 console.log(obj)
                 if (obj.status === "ok") {
-                    feel_dropdown(obj.data)
+                    feel_dropdown(JSON.parse(obj.data))
                 } else {
                     set_error_message(obj.status_description)
                     set_success_message("")
@@ -455,7 +455,7 @@
                 // remove_form()
                 console.log(obj)
                 if (obj.status === "ok") {
-                    var data = obj.data;
+                    var data = JSON.parse(obj.data);
                     data.forEach(function(file) {
                         if (terminal_id == file["IdPrinter"]) {
                             // console.log(file["PrintingDate"]);
@@ -492,7 +492,7 @@
                 // remove_form()
                 console.log(obj)
                 if (obj.status === "ok") {
-                    result = obj.data.Terminals;
+                    result = JSON.parse(obj.data).Terminals;
                     // data.forEach(function(terminal) {
                     //     console.log(terminal)
 

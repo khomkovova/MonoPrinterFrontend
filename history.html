@@ -220,7 +220,7 @@
                 // remove_form()
                 console.log(obj)
                 if (obj.status === "ok") {
-                    feel_dropdown(obj.data)
+                    feel_dropdown(JSON.parse(obj.data))
                 } else {
                     set_error_message(obj.status_description)
                     set_success_message("")
